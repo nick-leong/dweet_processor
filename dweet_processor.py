@@ -8,28 +8,41 @@ import json
 
 app = Flask(__name__)
 app.debug = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://nleong:420dankmemes420@pollappdb-cluster.cluster-cijys1vqvqce.us-west-2.rds.amazonaws.com'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
+dweet = 'https://thingspace.io/dweet/for/dweet_game_input?'
+
+ident = 0;
 
 @app.route('/', methods=['POST', 'GET'])
-def get_data(data=None):
+def send_dweet(dweet = dweet):
 
-    request_link = 'https://thingspace.io/get/dweets/for/test111'
+    global ident
 
-    req_dweet = urllib2.urlopen(request_link)
-    dweet = json.load(req_dweet)
+    if ident == 0:
+        ident = 1
+    elif ident == 1:
+        ident = 0
 
+    if request.method == 'POST':
+        if request.form['submit'] == 'up':
+            dweet += 'direction=u'
+            dweet += str(ident)
+        
+        elif request.form['submit'] == 'down':
+            dweet += 'direction=d'
+            dweet += str(ident)
+        
+        elif request.form['submit'] == 'right':
+            dweet += 'direction=r'
+            dweet += str(ident)
+        
+        elif request.form['submit'] == 'left':
+            dweet += 'direction=l'
+            dweet += str(ident)
 
-    amt_dweets = len(dweet['with'])
+    urllib2.urlopen(dweet)
 
-    d = []
-
-    for i in range(0, amt_dweets-1):
-        d.append(dweet['with'][i]['created'])
-
-    return render_template('answer_page.html', data=d)
-
+    return render_template('test.html')
 
 
 @app.errorhandler(404)

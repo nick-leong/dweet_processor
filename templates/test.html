@@ -1,15 +1,21 @@
 <!doctype html>
 <html>
-	<title>Answer</title>
+	<title>Send Command</title>
 
-	<ul>
-		{% if data %}
-			{% for item in data %}
-				<li>{{ item }}</li>
-			{% endfor %}
-		{% endif %}
-
-
-	</ul>
+	<div></div>
+	<form action="\" method="post">
+		<div>
+			<button type="submit" name="submit" value="up">UP</button>
+		</div>
+		<div>
+			<button type="submit" name="submit" value="down">DOWN</button>
+		</div>
+		<div>
+			<button type="submit" name="submit" value="left">LEFT</button>
+		</div>
+		<div>
+			<button type="submit" name="submit" value="right">RIGHT</button>
+		</div>
+	</form>
 
 </html>
