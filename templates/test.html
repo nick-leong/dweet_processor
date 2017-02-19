@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+	<title>Answer</title>
+
+	<ul>
+		{% if data %}
+			{% for item in data %}
+				<li>{{ item }}</li>
+			{% endfor %}
+		{% endif %}
+
+
+	</ul>
+
+</html>
